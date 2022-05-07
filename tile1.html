@@ -13,23 +13,11 @@
             padding: 0;
         }
         
-        #basemapslidercontainer {
-            position: absolute;
-            top: 50px;
-            right: 10px;
-            z-index: 1000;
-        }
-        
-        #basemapslider {
-            font-size: 62.5%;
-            margin: 14px;
-            height: 125px;
-            width: 7px;
-        }
-        
         #map {
+            position: absolute;
+            top: 0;
+            width: 0;
             width: 100%;
-            height: 100%;
         }
         /* the style of the layer control menu */
         
@@ -88,34 +76,34 @@
 
     <script type="text/javascript">
         mapboxgl.accessToken =
-            'pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw';
+            'pk.eyJ1IjoiYWxpYmFzYmV0aCIsImEiOiJjbDJ2ZnhzcGcwYjZ4M2pvYm5taWMydG8yIn0.QdMM73bOrvPuf106ax5Xaw';
         let map = new mapboxgl.Map({
             container: 'map', // container ID
             style: 'mapbox://styles/mapbox/dark-v10',
             zoom: 12, // starting zoom
-            center: [-122.31378715562506, 47.65102114016331] // starting center
+            center: [-122.2559435, 47.600261] // starting center
         });
-
 
 
         map.on('load', () => { //simplifying the function statement: arrow with brackets to define a function
 
-            map.addSource('map1-tiles', {
+            map.addSource('wetlands-tiles', {
                 'type': 'raster',
                 'tiles': [
-                    'Map-Tiles-Design-Lab4-geog458-main/assets/BaseMap1_tile{z}/{x}/{y}.png'
+                    'Map-Tiles-Design-Lab4-geog458/assets/wetlands/{z}/{x}/{y}.png'
                 ],
                 'tileSize': 256,
                 'attribution': 'Map tiles designed by Ali Basbeth</a>'
+                    // 'attribution': 'Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             });
 
             map.addLayer({
-                'id': 'map1-layer',
+                'id': 'wetlands',
                 'type': 'raster',
                 'layout': {
-                    'visibility': 'none'
+                    'visibility': 'visible'
                 },
-                'source': 'map1-tiles'
+                'source': 'wetlands-tiles'
             });
         });
 
@@ -123,12 +111,12 @@
         // After the last frame rendered before the map enters an "idle" state.
         map.on('idle', () => {
             // If these two layers were not added to the map, abort
-            if (!map.getLayer('map1-layer')) {
+            if (!map.getLayer('wetlands')) {
                 return;
             }
 
             // Enumerate ids of the layers.
-            const toggleableLayerIds = ['map1-layer'];
+            const toggleableLayerIds = ['wetlands'];
 
             // Set up the corresponding toggle button for each layer.
             for (const id of toggleableLayerIds) {
