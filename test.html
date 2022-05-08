@@ -124,6 +124,24 @@
 
         map.on('load', () => { //simplifying the function statement: arrow with brackets to define a function
 
+            map.addSource('basemapone-tiles', {
+                'type': 'raster',
+                'tiles': [
+                    'assets/basemapone/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Map tiles 1 designed by Ali Basbeth </a>'
+            });
+
+            map.addLayer({
+                'id': 'basemapone-layer',
+                'type': 'raster',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'source': 'basemapone-tiles'
+            });
+
             map.addSource('wet-tiles', {
                 'type': 'raster',
                 'tiles': [
@@ -177,70 +195,6 @@
                 },
                 'source': 'bluebase-tiles'
             });
-            /*
-            map.addSource('basicbasemap-tiles', {
-                'type': 'raster',
-                'tiles': [
-                    'tiles/basicbasemap/{z}/{x}/{y}.png'
-                ],
-                'tileSize': 256,
-                'attribution': 'Map tiles designed by Matthew Wicaksono'
-            });
-
-            map.addSource('carbonemissions-tiles', {
-                'type': 'raster',
-                'tiles': [
-                    'tiles/carbonemissions/{z}/{x}/{y}.png'
-                ],
-                'tileSize': 256,
-                'attribution': 'Map tiles designed by Matthew Wicaksono'
-            });
-
-            map.addSource('combine-tiles', {
-                'type': 'raster',
-                'tiles': [
-                    'tiles/combine/{z}/{x}/{y}.png'
-                ],
-                'tileSize': 256,
-                'attribution': 'Map tiles designed by Matthew Wicaksono'
-            });
-
-            map.addLayer({
-                'id': 'mine',
-                'type': 'raster',
-                'layout': {
-                    'visibility': 'none'
-                },
-                'source': 'mine-tiles'
-            });
-
-            map.addLayer({
-                'id': 'basicbasemap',
-                'type': 'raster',
-                'layout': {
-                    'visibility': 'none'
-                },
-                'source': 'basicbasemap-tiles'
-            });
-
-            map.addLayer({
-                'id': 'carbonemissions',
-                'type': 'raster',
-                'layout': {
-                    'visibility': 'none'
-                },
-                'source': 'carbonemissions-tiles'
-            });
-
-            map.addLayer({
-                'id': 'combine',
-                'type': 'raster',
-                'layout': {
-                    'visibility': 'none'
-                },
-                'source': 'combine-tiles'
-            });
-            */
 
             map.addControl(new mapboxgl.NavigationControl(), "top-left");
 
@@ -250,12 +204,12 @@
         // After the last frame rendered before the map enters an "idle" state.
         map.on('idle', () => {
             // If these two layers were not added to the map, abort
-            if (!map.getLayer('wet-layer') || !map.getLayer('broadband-layer') || !map.getLayer('Ocean-Day')) {
+            if (!map.getLayer('basemapone-layer') || !map.getLayer('wet-layer') || !map.getLayer('broadband-layer') || !map.getLayer('Ocean-Day')) {
                 return;
             }
 
             // Enumerate ids of the layers.
-            const toggleableLayerIds = ['wet-layer', 'broadband-layer', 'Ocean-Day'];
+            const toggleableLayerIds = ['basemapone-layer','wet-layer', 'broadband-layer', 'Ocean-Day'];
 
             // Set up the corresponding toggle button for each layer.
             for (const id of toggleableLayerIds) {

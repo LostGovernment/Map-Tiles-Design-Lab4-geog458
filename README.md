@@ -19,7 +19,18 @@ Map Design is one of the topic in digital geography; understanding tiles, and de
 For this lab assignment, I have decided to create four distinct maps which I developed on MapBox Studio. 
 
 
-1. The first one is a basemap that. 
+1. The picture shows the first basemap that I created. It has 14 different zoom levels, with the lowest at 1, and the highest is at 14. The basemap that I created is based off personality, the color white to light gray, and blue-ish are two of my favorite color. I believe that by designing the water to be this blue will make readers attracted to this map, because it is a very interesting color contrast. Additionally, the contrast will make it easy to differentiate between water and land. For instance, we can see the Skagit river clearly.
+Another important thing in regard to the color that I chose for this map is that blue represents the clean water of puget sounds, and the Salish sea where the Southern resident killer whale inhabit. 
+
+        Zoom Level 1 is equivalent to 512(pixels)	
+        78,271.5170 9.5546 Ground Resolution (meters / pixel)
+        1 : 295,829,355.45 Map Scale(at 96 dpi)
+
+        The largest zoom level 14 is equivalent to 
+        4,194,304	Ground Resolution (meters / pixel)
+        9.5546 Map Scale(at 96 dpi)
+
+![Basemap one](./assets/basemapone/basemapone.png)
 
 
 
@@ -31,7 +42,9 @@ For this lab assignment, I have decided to create four distinct maps which I dev
 
 
 
-4. The fourth map
+4. This base map is called "Wetlands and Parks in Cities", the zoom is limited to area around bellevue. The zoom can be 
+
+![Wetlands Map](./assets/wetlands/wetlands.png)
 
 
 
