@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Digital Geography Project Lab 4</title>
+    <title>Map Design By Ali Basbeth</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
@@ -12,14 +12,13 @@
             margin: 0;
             padding: 0;
         }
-        
+
         #map {
             position: absolute;
             top: 0;
-            width: 0;
+            bottom: 0;
             width: 100%;
         }
-        /* the style of the layer control menu */
         
         #menu {
             background: #fff;
@@ -28,11 +27,10 @@
             top: 10px;
             right: 10px;
             border-radius: 3px;
-            width: 120px;
+            width: 150px;
             border: 1px solid rgba(0, 0, 0, 0.4);
             font-family: 'Open Sans', sans-serif;
         }
-        /* each layer on the menu */
         
         #menu a {
             font-size: 13px;
@@ -44,26 +42,57 @@
             text-decoration: none;
             border-bottom: 1px solid rgba(0, 0, 0, 0.25);
             text-align: center;
+            text-transform: uppercase;
         }
-        /* the last item of the layer items will not include a seperator */
-        
+
         #menu a:last-child {
             border: none;
         }
+
         /* change color and background color while a pointer is on an hybrid link. */
-        
         #menu a:hover {
             background-color: #f8f8f8;
             color: #404040;
         }
-        
+
         #menu a.active {
             background-color: #3887be;
             color: #ffffff;
         }
-        
+
         #menu a.active:hover {
             background: #3074a4;
+        }
+
+        .map-overlay {
+            font: bold 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            position: absolute; 
+            width: 20%;
+            top: 0;
+            left: 0;
+            padding: 50px;
+        }
+        
+        .map-overlay .map-overlay-inner {
+            background-color: rgb(131, 131, 131);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .map-overlay label {
+            display: block;
+            margin: 0 0 10px;
+        }
+        
+        .map-overlay input {
+            background-color: transparent;
+            display: inline-block;
+            width: 100%;
+            position: relative;
+            margin: 0;
+            cursor: ew-resize;
         }
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
@@ -73,6 +102,12 @@
     <nav id="menu"></nav>
     <div id='map'></div>
 
+    <div class="map-overlay top">
+        <div class="map-overlay-inner">
+        <label>Adjust Opacity <span id="slider-value"></span></label>
+        <input id="slider" type="range" min="0" max="100" step="0" value="100">
+        </div>
+    </div>
 
     <script type="text/javascript">
         mapboxgl.accessToken =
@@ -80,43 +115,101 @@
         let map = new mapboxgl.Map({
             container: 'map', // container ID
             style: 'mapbox://styles/mapbox/dark-v10',
-            zoom: 12, // starting zoom
-            center: [-122.2559435, 47.600261] // starting center
+            zoom: 8, // starting zoom
+            center: [-120.7401, 47.7511] // starting center
         });
 
+        const slider = document.getElementById('slider');
+        const sliderValue = document.getElementById('slider-value');
 
         map.on('load', () => { //simplifying the function statement: arrow with brackets to define a function
 
-            map.addSource('wetlands-tiles', {
+            map.addSource('basemapone-tiles', {
                 'type': 'raster',
                 'tiles': [
-                    'assets/wetlands/{z}/{x}/{y}.png'
+                    'tiles/basemapone/{z}/{x}/{y}.png'
                 ],
                 'tileSize': 256,
-                'attribution': 'Map tiles designed by Ali Basbeth</a>'
-                    // 'attribution': 'Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                'attribution': 'Map tiles 1 designed by Ali Basbeth </a>'
             });
 
             map.addLayer({
-                'id': 'wetlands',
+                'id': 'basemapone-layer',
                 'type': 'raster',
                 'layout': {
-                    'visibility': 'visible'
+                    'visibility': 'none'
                 },
-                'source': 'wetlands-tiles'
+                'source': 'basemapone-tiles'
             });
+
+            map.addSource('wet-tiles', {
+                'type': 'raster',
+                'tiles': [
+                    'tiles/wetlands/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Map tiles 1 designed by Ali Basbeth </a>'
+            });
+
+            map.addLayer({
+                'id': 'wet-layer',
+                'type': 'raster',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'source': 'wet-tiles'
+            });
+
+            map.addSource('broadband-tiles', {
+                'type': 'raster',
+                'tiles': [
+                    'tiles/broadband_speed/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Map tiles 2 designed by Ali Basbeth </a>'
+            });
+
+            map.addLayer({
+                'id': 'broadband-layer',
+                'type': 'raster',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'source': 'broadband-tiles'
+            });
+
+            map.addSource('combine-tiles', {
+                'type': 'raster',
+                'tiles': [
+                    'tiles/tile3_combine/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Map tiles 3 designed by Ali Basbeth </a>'
+            });
+
+            map.addLayer({
+                'id': 'combine-layer',
+                'type': 'raster',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'source': 'combine-tiles'
+            });
+
+            map.addControl(new mapboxgl.NavigationControl(), "top-left");
+
         });
 
 
         // After the last frame rendered before the map enters an "idle" state.
         map.on('idle', () => {
             // If these two layers were not added to the map, abort
-            if (!map.getLayer('wetlands')) {
+            if (!map.getLayer('basemapone-layer') || !map.getLayer('wet-layer') || !map.getLayer('broadband-layer') || !map.getLayer('combine-layer')) {
                 return;
             }
 
             // Enumerate ids of the layers.
-            const toggleableLayerIds = ['wetlands'];
+            const toggleableLayerIds = ['basemapone-layer','wet-layer', 'broadband-layer', 'combine-layer'];
 
             // Set up the corresponding toggle button for each layer.
             for (const id of toggleableLayerIds) {
@@ -133,7 +226,7 @@
                 link.className = 'inactive';
 
                 // Show or hide layer when the toggle is clicked.
-                link.onclick = function(e) {
+                link.onclick = function (e) {
                     const clickedLayer = this.textContent;
                     // preventDefault() tells the user agent that if the event does not get explicitly handled, 
                     // its default action should not be taken as it normally would be.
@@ -162,6 +255,20 @@
                             'visible'
                         );
                     }
+
+                    slider.addEventListener('input', (e) => {
+                        // Adjust the layers opacity. layer here is arbitrary - this could
+                        // be another layer name found in your style or a custom layer
+                        // added on the fly using `addSource`.
+                        map.setPaintProperty(
+                        clickedLayer,
+                        'raster-opacity',
+                        parseInt(e.target.value, 10) / 100
+                        );
+                        
+                        // Value indicator
+                        sliderValue.textContent = e.target.value + '%';
+                    });
                 };
 
                 // in the menu place holder, insert the layer links.

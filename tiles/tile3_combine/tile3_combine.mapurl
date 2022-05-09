@@ -1,0 +1,5 @@
+url=tile3_combine/ZZZ/XXX/YYY.png
+minzoom=1
+maxzoom=14
+center=-122.233402 47.573099
+type=google
