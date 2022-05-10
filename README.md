@@ -14,9 +14,8 @@ Map Design is one of the topic in digital geography; understanding tiles, and de
     of the geographic area of each state".
 
     
-The map URL: <https://github.com/LostGovernment/Map-Tiles-Design-Lab4-geog458/blob/main/index.html>
 
-For this lab assignment, I have decided to create four distinct maps which I developed on MapBox Studio. 
+For this lab assignment, I have decided to create four distinct maps which I developed on MapBox Studio. The map can be accessed [here](https://lostgovernment.github.io/Map-Tiles-Design-Lab4-geog458/)
 
 
 1. The picture shows the first basemap that I created. It has 14 different zoom levels, with the lowest at 1, and the highest is at 14. The basemap that I created is based off personality, the color white to light gray, and blue-ish are two of my favorite color. I believe that by designing the water to be this blue will make readers attracted to this map, because it is a very interesting color contrast. Additionally, the contrast will make it easy to differentiate between water and land. For instance, we can see the Skagit river clearly.
