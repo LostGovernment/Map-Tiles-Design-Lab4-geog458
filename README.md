@@ -14,7 +14,7 @@ Map Design is one of the topic in digital geography; understanding tiles, and de
     of the geographic area of each state".
 
     
-
+The map URL: <https://github.com/LostGovernment/Map-Tiles-Design-Lab4-geog458/blob/main/index.html>
 
 For this lab assignment, I have decided to create four distinct maps which I developed on MapBox Studio. 
 

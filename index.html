@@ -94,6 +94,21 @@
             margin: 0;
             cursor: ew-resize;
         }
+        #intro {
+            position: absolute;
+            z-index: 2;
+            top: 150px;
+            left: 0;
+            background: rgba(255, 255, 255, 0.8);
+            margin-top: 10px;
+            margin-left: 10px;
+            height: 150px;
+            width: 300px;
+            font-family: sans-serif;
+            text-align: center;
+            color: black;
+        }
+
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
 </head>
@@ -101,6 +116,13 @@
 <body>
     <nav id="menu"></nav>
     <div id='map'></div>
+    <div id="intro">
+        <h1>Basemap design and Map Tile Generation</h1>
+        <p> The web-map has 4 tiles: the base map design, the second map is a thematic map <br> of broadband connectivity in washington state.<br> 
+            The third map is the combination between of the first and the second tile.<br> Lastly, the wetlands nature map, which shows map in 
+            area across puget sound. The maps is based on raster tiles. 
+        </p>
+    </div>
 
     <div class="map-overlay top">
         <div class="map-overlay-inner">
